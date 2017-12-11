@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Set Theory Android</string>
+    <string name="Directions">Type in your sets below (no parenthesis or commas), serparated by a new line:</string>
 </resources>
