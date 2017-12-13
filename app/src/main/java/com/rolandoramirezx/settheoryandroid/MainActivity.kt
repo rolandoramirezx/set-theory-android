@@ -17,6 +17,12 @@ class MainActivity : AppCompatActivity() {
 
 
         val calculate : Button = findViewById(R.id.Calculate)
-        calculate.setOnClickListener { Log.v("Hello world", input.text.toString()) }
+        calculate.setOnClickListener {
+            //Log.v("Hello world", input.text.toString())
+            //TODO-Split the string by lines
+            val lines = input.text.toString().split("\n")
+            //Then print out each line using Log.v
+            lines.forEach { it-> Log.v("Input: ", it)}
+        }
     }
 }
