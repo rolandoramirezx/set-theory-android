@@ -8,7 +8,11 @@ import android.widget.EditText
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.web.client.RestTemplate
 import android.os.AsyncTask
-
+import org.springframework.http.HttpEntity
+import org.springframework.http.HttpMethod
+import org.springframework.util.LinkedMultiValueMap
+import org.springframework.util.MultiValueMap
+import java.net.URI
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,22 +31,28 @@ class MainActivity : AppCompatActivity() {
             val lines = input.text.toString().split("\n")
             //Then print out each line using Log.v
             lines.forEach { it-> Log.v("Input: ", it)}
-            HttpRequestTask().execute(lines.toTypedArray())
+            HttpRequestTask().execute(*Array(lines.size, { it -> lines[it]}))
 
         }
     }
 }
 
-private class HttpRequestTask : AsyncTask<Array<String>, Void, MessageEntity>() {
-    override fun doInBackground(vararg params: Array<String>): MessageEntity? {
-    val url = "https://set-theory-web.herokuapp.com/api/settheory"
+private class HttpRequestTask : AsyncTask<String, Void, Array<SetResult>>() {
+    override fun doInBackground(vararg params: String): Array<SetResult>? {
+        val url = "https://set-theory-web.herokuapp.com/api/settheory"
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(MappingJackson2HttpMessageConverter())
-        return restTemplate.post
+
+        val map = LinkedMultiValueMap<String, String>()
+        map.add("HeaderName", "value");
+        map.add("Content-Type", "application/json")
+        val entity = HttpEntity<Array<String>>(Array(params.size, {it -> params[it]}), map)
+
+        return restTemplate.exchange(URI(url), HttpMethod.POST, entity, Array<SetResult>::class.java).body
     }
 
-    override fun onPostExecute(messageEntity: MessageEntity) {
-    Log.v("output", messageEntity.toString())
+    override fun onPostExecute(setResult: Array<SetResult>) {
+        Log.v("output", setResult.toString())
     }
 
 }
