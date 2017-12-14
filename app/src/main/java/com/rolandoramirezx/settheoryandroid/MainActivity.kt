@@ -27,18 +27,18 @@ class MainActivity : AppCompatActivity() {
             val lines = input.text.toString().split("\n")
             //Then print out each line using Log.v
             lines.forEach { it-> Log.v("Input: ", it)}
-            HttpRequestTask().execute()
+            HttpRequestTask().execute(lines.toTypedArray())
 
         }
     }
 }
 
-private class HttpRequestTask : AsyncTask<Void, Void, MessageEntity>() {
-    override fun doInBackground(vararg params: Void): MessageEntity? {
+private class HttpRequestTask : AsyncTask<Array<String>, Void, MessageEntity>() {
+    override fun doInBackground(vararg params: Array<String>): MessageEntity? {
     val url = "https://set-theory-web.herokuapp.com/api/settheory"
         val restTemplate = RestTemplate()
         restTemplate.messageConverters.add(MappingJackson2HttpMessageConverter())
-        return restTemplate.getForObject(url, MessageEntity::class.java)
+        return restTemplate.post
     }
 
     override fun onPostExecute(messageEntity: MessageEntity) {
@@ -48,3 +48,6 @@ private class HttpRequestTask : AsyncTask<Void, Void, MessageEntity>() {
 }
 
 data class MessageEntity(var message: String = "") //val = read only
+
+data class SetResult(var set : String = "", var outcome : String = "")
+
