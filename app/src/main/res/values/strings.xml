@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Set Theory Android</string>
     <string name="Directions">Type in your sets below (no parenthesis or commas), serparated by a new line:</string>
+    <string name="Ouput_Language">You\'ll find the results of your calculations below:</string>
 </resources>
