@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val input : EditText = findViewById(R.id.Input)
 
-
+        //button function
         val calculate : Button = findViewById(R.id.Calculate)
         calculate.setOnClickListener {
             //Log.v("Hello world", input.text.toString())
