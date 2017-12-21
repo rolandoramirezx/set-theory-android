@@ -12,7 +12,6 @@ import android.widget.Toast
 import org.springframework.http.HttpEntity
 import org.springframework.http.HttpMethod
 import org.springframework.util.LinkedMultiValueMap
-import org.springframework.util.MultiValueMap
 import java.net.URI
 import android.content.Intent
 import com.google.gson.Gson
@@ -25,10 +24,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val input : EditText = findViewById(R.id.Input)
+        val input : EditText = findViewById(R.id.Calculations)
 
         //button function
-        val calculate : Button = findViewById(R.id.Calculate)
+        val calculate : Button = findViewById(R.id.actionButton)
         calculate.setOnClickListener {
             val lines = input.text.toString().split("\n")
             //Then print out each line using Log.v
@@ -70,10 +69,18 @@ class ResultsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_resultsactivity)
-        val intent = intent
 
-        val results = Gson().fromJson(intent.getStringExtra("json"), Array<SetResult>::class.java)
-        results.forEach { it-> Log.v(ResultsActivity::class.java.name, it.toString())}
+        with (Gson().fromJson(intent.getStringExtra("json"), Array<SetResult>::class.java)){
+            findViewById<EditText>(R.id.Calculations).setText(joinToString(separator = "\n") { it -> "${it.set} -> ${it.outcome}" })
+        }
+
+        //reference to returnButton
+        val actionButton: Button = findViewById(R.id.actionButton)
+        actionButton.setOnClickListener{
+            val intent = Intent(this@ResultsActivity, MainActivity::class.java)
+            this@ResultsActivity.startActivity(intent)
+        }
+
     }
 }
 

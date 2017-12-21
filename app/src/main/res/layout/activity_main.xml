@@ -16,7 +16,7 @@
             android:id="@+id/editText"
             android:text="@string/Directions"
             android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/Input" android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/Calculations" android:layout_marginLeft="8dp"
             app:layout_constraintLeft_toLeftOf="parent" android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent"/>
     <EditText
@@ -24,16 +24,16 @@
             android:layout_height="186dp"
             android:inputType="textMultiLine"
             android:ems="10"
-            android:id="@+id/Input"
+            android:id="@+id/Calculations"
             android:shadowColor="@android:color/background_dark" android:background="@android:color/darker_gray"
-            android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/Calculate"
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toTopOf="@+id/actionButton"
             android:layout_marginRight="8dp" app:layout_constraintRight_toRightOf="parent"
             android:layout_marginLeft="8dp" app:layout_constraintLeft_toLeftOf="parent"/>
     <Button
             android:text="Button"
             android:layout_width="88dp"
             android:layout_height="wrap_content"
-            android:id="@+id/Calculate"
+            android:id="@+id/actionButton"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp" android:layout_marginRight="8dp"
             app:layout_constraintRight_toRightOf="parent" android:layout_marginLeft="8dp"
