@@ -84,14 +84,6 @@ class ResultsActivity : AppCompatActivity() {
     }
 }
 
-
-
-
-
-
-
-
-
 data class MessageEntity(var message: String = "") //val = read only
 
 data class SetResult(var set : String = "", var outcome : String = ""): Serializable
